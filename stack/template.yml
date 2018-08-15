@@ -8,14 +8,14 @@ Parameters:
 
   BaseUrl:
     Type: String
-    Default: bliskavka.com
+    Default: liandrasoftworks.com
     Description : The DNS name of an existing Amazon Route 53 hosted zone,
     AllowedPattern : (?!-)[a-zA-Z0-9-.]{1,63}(?<!-)[^\\.]$
     ConstraintDescription : Must be a valid DNS zone name WITHOUT trailing period.
 
   AppUrl:
     Type: String
-    Default: www.bliskavka.com
+    Default: aws-angular-starter.liandrasoftworks.com
     Description: The subdomain you want to use for your app. This example creates a subdomain and an A record
 
   AcmCertArn:
@@ -113,20 +113,21 @@ Resources:
           DNSName: !GetAtt 
             - AppDistribution
             - DomainName
-      - Name: !Ref BaseUrl
-        Type: A
-        AliasTarget:
-          HostedZoneId: Z2FDTNDATAQYW2
-          DNSName: !GetAtt 
-            - AppDistribution
-            - DomainName
-      - Name: !Ref BaseUrl
-        Type: AAAA
-        AliasTarget:
-          HostedZoneId: Z2FDTNDATAQYW2
-          DNSName: !GetAtt 
-            - AppDistribution
-            - DomainName
+#Uncomment this section if you want your base URL to open your app also
+      # - Name: !Ref BaseUrl
+      #   Type: A
+      #   AliasTarget:
+      #     HostedZoneId: Z2FDTNDATAQYW2
+      #     DNSName: !GetAtt 
+      #       - AppDistribution
+      #       - DomainName
+      # - Name: !Ref BaseUrl
+      #   Type: AAAA
+      #   AliasTarget:
+      #     HostedZoneId: Z2FDTNDATAQYW2
+      #     DNSName: !GetAtt 
+      #       - AppDistribution
+      #       - DomainName
             
 Outputs:
   AppBucket:
