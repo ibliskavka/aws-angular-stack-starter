@@ -16,7 +16,7 @@ Parameters:
   AppUrl:
     Type: String
     Default: aws-angular-starter.liandrasoftworks.com
-    Description: The subdomain you want to use for your app. This example creates a subdomain and an A record
+    Description: The subdomain you want to use for your app. Use www for your main domain.
 
   AcmCertArn:
     Type: String
