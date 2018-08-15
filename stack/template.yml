@@ -8,14 +8,14 @@ Parameters:
 
   BaseUrl:
     Type: String
-    Default: liandrasoftworks.com
+    Default: bliskavka.com
     Description : The DNS name of an existing Amazon Route 53 hosted zone,
     AllowedPattern : (?!-)[a-zA-Z0-9-.]{1,63}(?<!-)[^\\.]$
     ConstraintDescription : Must be a valid DNS zone name WITHOUT trailing period.
 
   AppUrl:
     Type: String
-    Default: aws-angular-starter.liandrasoftworks.com
+    Default: example.bliskavka.com
     Description: The subdomain you want to use for your app. Use www for your main domain.
 
   AcmCertArn:
@@ -75,7 +75,7 @@ Resources:
         DefaultRootObject: index.html
         Aliases:
         - !Ref AppUrl
-        - !Ref BaseUrl
+        #- !Ref BaseUrl                   # Uncomment this if you want to map your domain root
         DefaultCacheBehavior:
           AllowedMethods:
             - GET
@@ -113,7 +113,7 @@ Resources:
           DNSName: !GetAtt 
             - AppDistribution
             - DomainName
-#Uncomment this section if you want your base URL to open your app also
+## Uncomment this if you want to map your domain root
       # - Name: !Ref BaseUrl
       #   Type: A
       #   AliasTarget:
