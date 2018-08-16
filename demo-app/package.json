@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "ng build --prod --aot && aws s3 sync dist/demo-app s3://aws-ng-demo-app && aws cloudfront create-invalidation --distribution-id E1X2OT1UXBWP74 --paths /"
   },
   "private": true,
   "dependencies": {
