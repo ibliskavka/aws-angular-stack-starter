@@ -133,11 +133,9 @@ Outputs:
   AppBucket:
     Description: Where the app was deployed to
     Value: !Ref AppBucket
-  WebsiteURL:
-    Value: !GetAtt 
-      - AppBucket
-      - WebsiteURL
-    Description: URL for website hosted on S3
+  DistributionId:
+    Value: !Ref AppDistribution
+    Description: DistributionId
   CloudFrontURL:
     Value: !Join 
       - ''
