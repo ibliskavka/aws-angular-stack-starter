@@ -27,7 +27,6 @@ Resources:
   AppBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub ${AWS::StackName}-app
       AccessControl: PublicRead
       WebsiteConfiguration:
         IndexDocument: index.html
