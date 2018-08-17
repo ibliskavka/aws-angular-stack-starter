@@ -20,7 +20,7 @@ Run the following command from the /stack directory:
 Get the CloudFront DistributionId and S3 bucket by running the following command  
 (you can also get this from the web console)
 
-`aws cloudformation describe-stacks --stack-name aws-ng-demo --query "Stacks[0].Outputs[?OutputKey==`DistributionId` || OutputKey==`AppBucket`]"`
+```aws cloudformation describe-stacks --stack-name aws-ng-demo --query "Stacks[0].Outputs[?OutputKey==`DistributionId` || OutputKey==`AppBucket`]"```
 
 ## Deploy the App
 
