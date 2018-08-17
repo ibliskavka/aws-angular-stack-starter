@@ -130,11 +130,11 @@ Resources:
             
 Outputs:
   AppBucket:
-    Description: Where the app was deployed to
+    Description: S3 Bucket hosting our demo-app
     Value: !Ref AppBucket
   DistributionId:
     Value: !Ref AppDistribution
-    Description: DistributionId
+    Description: CloudFront DistributionId
   CloudFrontURL:
     Value: !Join 
       - ''
