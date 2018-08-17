@@ -1,8 +1,7 @@
 AWSTemplateFormatVersion: 2010-09-09
 
-
 Description: >
-  Creates the AWS infrastructure resources for running an angular app
+  Creates the AWS infrastructure for running an Angular app in AWS using S3, CloudFront & Route53
 
 Parameters:
 
@@ -22,8 +21,10 @@ Parameters:
     Type: String
     Description: ARN of the Amazon Certificate Manager cert to use for SSL
 
+
 Resources:
 
+  # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html
   AppBucket:
     Type: AWS::S3::Bucket
     Properties:
@@ -31,6 +32,7 @@ Resources:
       WebsiteConfiguration:
         IndexDocument: index.html
 
+  # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html
   AppBucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
@@ -49,12 +51,14 @@ Resources:
                 - /*
       Bucket: !Ref AppBucket
 
+  # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-cloudfrontoriginaccessidentity.html
   OriginAccessIdentity:
     Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
     Properties:
       CloudFrontOriginAccessIdentityConfig:
         Comment: Access identity between CloudFront and S3 bucket
 
+  # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html
   AppDistribution:
     Type: AWS::CloudFront::Distribution
     Properties:
@@ -74,7 +78,7 @@ Resources:
         DefaultRootObject: index.html
         Aliases:
         - !Ref AppUrl
-        #- !Ref BaseUrl                   # Uncomment this if you want to map your domain root
+        #- !Ref BaseUrl                           # Uncomment this if you want to map your domain root
         DefaultCacheBehavior:
           AllowedMethods:
             - GET
@@ -92,6 +96,7 @@ Resources:
           AcmCertificateArn: !Ref AcmCertArn
           SslSupportMethod: sni-only
 
+  # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordsetgroup.html
   WebAppDns:
     Type: AWS::Route53::RecordSetGroup
     Properties:
@@ -112,8 +117,7 @@ Resources:
           DNSName: !GetAtt 
             - AppDistribution
             - DomainName
-## Uncomment this if you want to map your domain root
-      # - Name: !Ref BaseUrl
+      # - Name: !Ref BaseUrl                        # Uncomment this area if you want to map your domain root
       #   Type: A
       #   AliasTarget:
       #     HostedZoneId: Z2FDTNDATAQYW2
