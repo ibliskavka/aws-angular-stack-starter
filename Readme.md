@@ -24,7 +24,8 @@ Get the CloudFront DistributionId and S3 bucket by running the following command
 
 ## Deploy the App
 
-1. Update /demo-app/package.json/scripts/deploy with your S3 bucket name and CloudFront distribution id
+1. Update /demo-app/package.json/scripts/deploy  
+Replace {AppBucket} & {DistributionId} with your stack outputs
 2. Run the following command from the /demo-app directory  
 `npm run deploy`
 
