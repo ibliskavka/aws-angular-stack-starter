@@ -4,7 +4,7 @@
 This starter project shows how to create the hosting infrastructure for an Angular app using CloudFormation and how to deploy the app using the CLI.
 
 The full write up and article can be found at:  
-TODO
+https://medium.com/@ibliskavka/aws-angular-stack-automation-b45767bda2ec
 
 ### Prerequisites
 * Amazon Route53 Domain
